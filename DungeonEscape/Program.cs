@@ -47,7 +47,7 @@ namespace DungeonEscape
                 new MenuOption("Exit", ExitProgram)
             };
 
-        static private void ShowMenu(MenuOption[] menuOptions)
+        static private void ShowMenu(MenuOption[] menuOptions, MenuOption[]? parentMenu = null)
         {
             int selectedIndex = 0;
 
@@ -92,7 +92,7 @@ namespace DungeonEscape
                     {
                         if (selectedOption.SubMenu != null)
                         {
-                            ShowMenu(selectedOption.SubMenu);
+                            ShowMenu(selectedOption.SubMenu, menuOptions);
                             Console.Clear();
                             Console.WriteLine("Use the arrow keys to navigate, and Enter to select an option:\n");
                             for (int i = 0; i < menuOptions.Length; i++)
@@ -138,7 +138,14 @@ namespace DungeonEscape
                 }
                 else if (keyInfo.Key == ConsoleKey.Escape)
                 {
-                    ExitProgram();
+                    if (parentMenu != null)
+                    {
+                        ShowMenu(parentMenu);
+                    }
+                    else
+                    {
+                        ExitProgram();
+                    }
                     return;
                 }
 
@@ -155,6 +162,7 @@ namespace DungeonEscape
                 }
             }
         }
+
 
         static private void WaitForEnter(Action action)
         {
