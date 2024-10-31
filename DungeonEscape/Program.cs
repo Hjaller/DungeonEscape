@@ -29,8 +29,16 @@ namespace DungeonEscape
 {
                 new MenuOption("Predefined - Dungeon Escape", null, new MenuOption[]
                 {
-                    new MenuOption("Show traps and keys", () => new PredefinedGame(true).StartGame()),
-                    new MenuOption("Don't show traps and keys", () => new PredefinedGame(false).StartGame()),
+                    new MenuOption("Show traps and keys", () =>
+                    {
+                        GameInstructions();
+                        new PredefinedGame(true).StartGame();
+                    }),
+                    new MenuOption("Don't show traps and keys", () =>
+                    {
+                        GameInstructions();
+                        new PredefinedGame(false).StartGame();
+                    }),
                 }),
                 new MenuOption("Dynamic - Dungeon Escape", null, new MenuOption[]
                 {
