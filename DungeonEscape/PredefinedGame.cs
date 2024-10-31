@@ -8,7 +8,6 @@ namespace DungeonEscape
 {
     internal class PredefinedGame
     {
-
         private int[,] _maze =
         {
             //1 wall, 2 trap, 3 key, 4 exit 
@@ -23,13 +22,21 @@ namespace DungeonEscape
         private (int, int) _playerStart = (1, 1), _playerPosition;
         private bool _hasKey = false; // Indicates whether the player has the key
         private bool _showKeysAndTraps;
+
+        /// <summary>
+        /// Initializes a new instance of the PredefinedGame class.
+        /// </summary>
+        /// <param name="showKeysAndTraps">Indicates whether to show keys and traps in the maze.</param>
         public PredefinedGame(bool showKeysAndTraps = false)
         {
             _showKeysAndTraps = showKeysAndTraps; // Set the preference based on input
         }
+
+        /// <summary>
+        /// Starts the game and handles the main game loop.
+        /// </summary>
         public void StartGame()
         {
-            
             _playerPosition = _playerStart; // Set the player's starting position
             PrintMaze(); // Print the maze
 
@@ -58,14 +65,13 @@ namespace DungeonEscape
                     if (!_hasKey)
                     {
                         message = "You need the key to exit!"; // Message when trying to exit without key
-
-                    } else
+                    }
+                    else
                     {
                         message = "Congratulations! You have escaped the maze!"; // Message when exiting
                         PrintMaze(message); // Print maze with exit message
                         break; // End the game
                     }
-
                 }
                 else if (!moved) // If movement failed
                 {
@@ -77,6 +83,10 @@ namespace DungeonEscape
             }
         }
 
+        /// <summary>
+        /// Prints the maze to the console, displaying the player, exit, and optionally the key and traps.
+        /// </summary>
+        /// <param name="message">Optional message to display.</param>
         private void PrintMaze(string message = "")
         {
             Console.Clear(); // Clear the console
@@ -113,6 +123,11 @@ namespace DungeonEscape
             }
         }
 
+        /// <summary>
+        /// Moves the player based on the input key.
+        /// </summary>
+        /// <param name="key">The key pressed by the user.</param>
+        /// <returns>True if the move was successful, otherwise false.</returns>
         private bool MovePlayer(ConsoleKey key)
         {
             int newX = _playerPosition.Item1, newY = _playerPosition.Item2;
